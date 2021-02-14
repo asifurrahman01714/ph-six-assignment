@@ -25,20 +25,20 @@ const showImages = (images) => {
     gallery.appendChild(div);
 
     //adding feature number 2: image lightbox
-    //If you click any image in the gallery this will show as lightbox....
+    //If you click double in any image in the gallery this will show as lightbox....
     //To return..you should click out of the lightbox image.
 
     const lightbox = document.createElement('div')
     lightbox.id = 'lightbox'
     document.body.appendChild(lightbox);
-    div.addEventListener('click', e => {
+    div.addEventListener('dblclick', e => {
       lightbox.classList.add('active')
       const img = document.createElement('img')
       img.src = `${image.webformatURL}`;
       while (lightbox.firstChild) {
         lightbox.removeChild(lightbox.firstChild)
       }
-      lightbox.appendChild(img)
+      lightbox.appendChild(img);
     })
 
     lightbox.addEventListener('click', e => {

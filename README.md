@@ -1,4 +1,7 @@
 # ph-six-assignment
+
+
+
 code : https://github.com/asifurrahman01714/ph-six-assignment
 livesite: https://asifurrahman01714.github.io/ph-six-assignment/
 
@@ -11,5 +14,5 @@ livesite: https://asifurrahman01714.github.io/ph-six-assignment/
 # Feature 1: Adding spinner when loading data in app.js: 175-182;
 # Feature 2: Image lightbox in app.js: 31-47;
 
-    *** If you click any image in the gallery this will show as lightbox....
+    *** If you click double any image in the gallery this will show as lightbox....
     *** To return..you should click out of the lightbox image.
