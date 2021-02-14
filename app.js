@@ -7,7 +7,6 @@ const sliderContainer = document.getElementById('sliders');
 // selected image 
 let sliders = [];
 
-
 // If this key doesn't work
 // Find the name in the url and go to their website
 // to create your own api key
@@ -23,7 +22,29 @@ const showImages = (images) => {
     let div = document.createElement('div');
     div.className = 'col-lg-3 col-md-4 col-xs-6 img-item mb-2';
     div.innerHTML = ` <img class="img-fluid img-thumbnail" onclick=selectItem(event,"${image.webformatURL}") src="${image.webformatURL}" alt="${image.tags}">`;
-    gallery.appendChild(div)
+    gallery.appendChild(div);
+
+    //adding feature number 2: image lightbox
+    //If you click any image in the gallery this will show as lightbox....
+    //To return..you should click out of the lightbox image.
+
+    const lightbox = document.createElement('div')
+    lightbox.id = 'lightbox'
+    document.body.appendChild(lightbox);
+    div.addEventListener('click', e => {
+      lightbox.classList.add('active')
+      const img = document.createElement('img')
+      img.src = `${image.webformatURL}`;
+      while (lightbox.firstChild) {
+        lightbox.removeChild(lightbox.firstChild)
+      }
+      lightbox.appendChild(img)
+    })
+
+    lightbox.addEventListener('click', e => {
+      if (e.target !== e.currentTarget) return
+      lightbox.classList.remove('active')
+    })
     toggleSpinner(false);
   })
 
@@ -35,7 +56,7 @@ const getImages = (query) => {
     .then(response => response.json())
     //.then(data => showImages(data.hitS))   ***Problem Number 1: here int "data.hitS" the alphabet "s" is in uppercase which is wrong.
 
-    .then(data => showImages(data.hits))  // *** Now the first problem is fixed when I have set "data.hits" on the contrary of "data.hitS"
+    .then(data => showImages(data.hits)) // *** Now the first problem is fixed when I have set "data.hits" on the contrary of "data.hitS"
     .catch(err => console.log(err))
 }
 
@@ -43,13 +64,13 @@ let slideIndex = 0;
 const selectItem = (event, img) => {
   let element = event.target;
   element.classList.add('added');
- 
+
   let item = sliders.indexOf(img);
   if (item === -1) {
     sliders.push(img);
   } else {
     //alert('Hey, Already added !');
-    toggleImage(element,img);
+    toggleImage(element, img);
   }
 }
 var timer
@@ -73,9 +94,9 @@ const createSlider = () => {
   // hide image aria
   imagesArea.style.display = 'none';
   let duration = document.getElementById('duration').value || 1000;
-  console.log('duration', duration);  // *** the 2nd problem is solved  after changing the name of the {id="duration"} in the input box in line number 31.
-  
-  if(duration < 1000){
+  console.log('duration', duration); // *** the 2nd problem is solved  after changing the name of the {id="duration"} in the input box in line number 33.
+
+  if (duration < 1000) {
     alert('As you input a value less than 1000 so we have fixed your duration time as 1000ms'); //*** the 3rd problem is solved by fixing duration as 1000ms for any value less then 1000 */
     duration = 1000;
   }
@@ -135,14 +156,13 @@ sliderBtn.addEventListener('click', function () {
 
 //problem number 5 has been solver here by toggling 'added' class
 // toggle image click
-const toggleImage = (element,img)=>{
+const toggleImage = (element, img) => {
   element.classList.toggle('added');
   const index = sliders.indexOf(img);
   if (index > -1) {
-      sliders.splice(index, 1);
+    sliders.splice(index, 1);
   }
 }
-
 
 //Extra feature number : 1
 //this feature will show a spinner when loading data
@@ -152,11 +172,11 @@ const toggleImage = (element,img)=>{
   spinner.classList.toggle('d-none');
 }*/
 
-const toggleSpinner = (show)=>{
+const toggleSpinner = (show) => {
   const spinner = document.getElementById('loading-spinner');
-   if(show){
-      spinner.classList.remove('d-none');
-   } else{
-      spinner.classList.add('d-none');
-   }
+  if (show) {
+    spinner.classList.remove('d-none');
+  } else {
+    spinner.classList.add('d-none');
+  }
 }
