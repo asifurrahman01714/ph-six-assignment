@@ -31,7 +31,9 @@ const showImages = (images) => {
 const getImages = (query) => {
   fetch(`https://pixabay.com/api/?key=${KEY}=${query}&image_type=photo&pretty=true`)
     .then(response => response.json())
-    .then(data => showImages(data.hitS))
+    //.then(data => showImages(data.hitS))   ***Problem Number 1: here int "data.hitS" the alphabet "s" is in uppercase which is wrong.
+
+    .then(data => showImages(data.hits))  // *** Now the first problem is fixed when I have set "data.hits" on the contrary of "data.hitS"
     .catch(err => console.log(err))
 }
 
